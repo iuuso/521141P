@@ -23,24 +23,27 @@ def define_size():
     while True:
         try:
             size = raw_input("Insert the size of the Minefield (number x number)\nSize: ")
+            x = int(size.split(" x ")[0])
+            y = int(size.split(" x ")[1])
 
-            if bool(size_validator(size)) == True:
-                break
-            else:
+            if x <= 0 or y <= 0:
+                print "Err: Minefield too small, how about 24 x 24?\n"
                 continue
+            else:
+                return x, y
 
-        except IndexError:
+        except ValueError:
             print "Err: The size you inserted is not in the required format, for example 24 x 24\n"
 
-def size_validator(size):
-    try:
-        x = int(size.split(" x ")[0])
-        y = int(size.split(" x ")[1])
-        print x
-        print y
-        return x, y
-    except ValueError:
-        print "Err: The characters you entered are not numbers. Try again."
+def draw_board(x, y):
+    vertical = [x]
+    horizontal = [y]
+    print horizontal, vertical
+
+    for i in x :
+        print "| |"
+
 
 if __name__ == "__main__":
-    define_size()
+    gameboardSize = define_size()
+    draw_board(gameboardSize[0], gameboardSize[1])
